@@ -1,0 +1,4 @@
+2021-01-03 22:38:20,109 - D:/code/python/csdn_nlp/NLP_DEMO/Web_crawler/spider_for_csdn.py[line:237] - DEBUG: starting !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+2021-01-03 22:38:27,534 - D:/code/python/csdn_nlp/NLP_DEMO/Web_crawler/spider_for_csdn.py[line:255] - DEBUG: 获取所有博客链接完成
+2021-01-03 22:45:28,723 - D:/code/python/csdn_nlp/NLP_DEMO/Web_crawler/spider_for_csdn.py[line:264] - DEBUG: 获取所有博客内容完成
+2021-01-03 22:45:30,102 - D:/code/python/csdn_nlp/NLP_DEMO/Web_crawler/spider_for_csdn.py[line:278] - DEBUG: 博客内容入库完成

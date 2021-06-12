@@ -1,0 +1,71 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="mobile-web-app-capable" content="yes">
+    
+<script>
+
+	$(document).on("pageinit","#pageone",function(){
+
+		$("#submit_button").click(function(){
+            var msg = $("#msg_content").val();
+            var url = "<your api gateway url>" + msg;
+            //console.log(msg);
+            $(".ui-block-b.dialog:last").after('<div class="ui-block-a dialog"></div><div class="ui-block-b dialog"></div>');
+            $(".ui-block-b.dialog:last").text(msg);
+            $("#msg_content").text("");
+
+            $.get(url,function(data,status){
+                //console.log(data['text']);
+                $(".ui-block-b.dialog:last").after('<div class="ui-block-a dialog"></div><div class="ui-block-b dialog"></div>');
+                $(".ui-block-a.dialog:last").text(data['text']);
+            });          
+                     
+        });
+    });          
+		  
+</script>
+
+<style>
+.ui-block-a.dialog
+{
+    text-align:left;
+}
+.ui-block-b.dialog
+{
+    text-align:right;
+}
+</style>
+</head>
+
+<body>
+
+<div data-role="page" id="pageone">
+  <div data-role="header" data-position="fixed" >
+    <h1>ChatBot</h1>
+  </div>
+    <div data-role="main" class="ui-content">
+    <div class="ui-grid-a">
+        <div class="ui-block-a dialog" >Hello</div>
+        <div class="ui-block-b dialog"></div>
+	</div>
+    </div>
+
+  <div data-role="footer" data-position="fixed" >
+    <div class="ui-grid-a">
+      <div class="ui-block-a" style="width:80%"><input name="msg_content" id="msg_content" data-clear-btn="true"></div>
+      <div class="ui-block-b" style="width:20%"><a data-role="button" id="submit_button">发送</a></div>
+    </div>
+  </div>
+</div> 
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<html lang="zh-cn" >
+<head>
+<meta charset="utf-8" />
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no" media="screen" />
+<title>在线客服</title>
+<link href="css/webiaoqing.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+	body{/*background:url(images/yuyin_bg.png) no-repeat;background-size:100%;*/background: #eee;}
+	@media all and (min-width: 640px) {
+	    body,html,.wenwen-footer,.speak_window{width:640px!important;margin:0 auto}
+	    .speak_window,.wenwen-footer{left:50%!important;margin-left:-320px}
+	}
+	input,button{outline:none;}
+	.wenwen-footer{width:100%;position:fixed;bottom:0;left:0;background:#fff;padding:3%;border-top:solid 1px #ddd;box-sizing:border-box;}
+	.wenwen_btn,.wenwen_help{width:15%;text-align:center;}
+	.wenwen_btn img,.wenwen_help img{height:40px;}
+	.wenwen_text{height:40px;border-radius:5px;border:solid 1px #636162;box-sizing:border-box;width:56%;text-align:center;overflow:hidden;margin-left:2%;}
+	.circle-button{padding:0 5px;}
+	.wenwen_text .circle-button{font-size:14px;color:#666;line-height:38px;}
+	.write_box{background:#fff;width:100%;height:40px;line-height:40px;display:none;}
+	.write_box input{height:40px;padding:0 5px;line-height:40px;width:100%;box-sizing:border-box;border:0;}
+	.wenwen_help button{width:95%;background:#3498db;color:#fff;border-radius:5px;border:0;height:40px;display:none;}
+	#wenwen{height:100%;}
+	.speak_window{overflow-y:scroll;height:100%;width:100%;position:fixed;top:0;left:0;}
+	.speak_box{margin-bottom:70px;padding:10px;}
+	.question,.answer{margin-bottom:1rem;}
+	.question{text-align:right;}
+	.question>div{display:inline-block;}
+	.left{float:left;}
+	.right{float:right;}
+	.clear{clear:both;}
+	.heard_img{height:48px;width:48px;border-radius:5px;overflow:hidden;background:#fff;}
+	.heard_img img{width:100%;height:100%}
+	.question_text,.answer_text{box-sizing:border-box;position:relative;display:table-cell;min-height:60px;}
+	.question_text{padding-right:20px;}
+	.answer_text{padding-left:20px;}
+	.question_text p,.answer_text p{border-radius:10px;padding:.5rem;margin:0;font-size:14px;line-height:28px;box-sizing:border-box;vertical-align:middle;display:table-cell;height:60px;word-wrap:break-word;}
+	.answer_text p{background:#fff;    max-width: 220px;}
+	.question_text p{background:#3498db;color:#fff;text-align:left;    max-width: 220px;}
+	.question_text i,.answer_text i{width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;position:absolute;top:25px;}
+	.answer_text i{border-right:10px solid #fff;left:10px;}
+	.question_text i{border-left:10px solid #42929d;right:10px;}
+	.answer_text p a{color:#42929d;display:inline-block;}
+	audio{display:none;}
+	.saying{position:fixed;bottom:30%;left:50%;width:120px;margin-left:-60px;display:none;}
+	.saying img{width:100%;}
+	.write_list{position:absolute;left:0;width:100%;background:#fff;border-top:solid 1px #ddd;padding:5px;line-height:30px;}
+	.emotion-btn{width: 40px;height: 40px; font-size: 42px;line-height: 41px;overflow: hidden; color: #777; display: inline-block;}
+	.meng_ceng{ position: fixed;z-index: 9999; top: 0; bottom: 0; left: 0;right: 0;background: #000; opacity: 0.4;color: #fff; display: none;}
+	.meng_ceng span{ position: absolute; display: inline-block; width: 100%; text-align: center; top: 50%; }
+</style>
+</head>
+<body>
+	<div class="meng_ceng"><span>稍等一下，机器人在思考哦....</span></div>
+	<iframe src='wqpage/index.html' width="100%" height="300" style="position: fixed;display:none;top: 150px;z-index: 99999999" frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+<div class="speak_window" style="padding-top: 40px;box-sizing: border-box;">
+	<div style="width: 100%;height: 40px;line-height: 40px;background: #3498db;color: #fff; font-size: 14px; text-align: center;position: fixed;top: 0;left: 0;z-index: 10000;">客服人员1</div>
+
+
+
+
+	<div class="speak_box">
+
+		<div class="answer">
+			<div class="heard_img left"><img src="images/tx.png"></div>
+			<div class="answer_text">
+				<p>您好，为了让客服MM更好的为您提供本次服务，请描述您想咨询的问题，客服MM会快马加鞭的帮您查询、竭诚为您解决的~~</p>
+				<i></i>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="saying">
+	<img src="images/saying.gif"/>
+</div>
+<div class="wenwen-footer">
+	<div class="wenwen_btn left" onClick="to_write()"><img src="images/jp_btn.png"></div>
+	<a href="javascript:;" class="emotion-btn" style="display: none;float: left;"><img src="images/13.png" width="40"></a>
+	<div class="wenwen_text left" style="height: auto;">
+	    <div class="write_box" contenteditable="true" onkeydown="myInput.listen(this, event);" id="form_article" style="text-align: left; height: auto;line-height: 20px;    min-height: 40px;text-indent: 3px;">
+	       
+	    </div>   
+	    
+	    <div class="circle-button" id="wenwen">
+	        按住 说话
+	    </div>
+	</div>
+	
+	<div class="wenwen_help right">
+	    <a href="javascript:;">
+	        <img src="images/help_btn.png">
+	    </a>
+	    
+	    <button onClick="up_say()" class="right">发送</button>
+	</div>
+	<div style="opacity:0;" class="clear"></div>
+</div>
+
+	<div class="emotion-div" style="position: fixed;bottom:-300px; left: 0; ">
+		<!-- <article id="form_article" contenteditable="true" onkeydown="myInput.listen(this, event);"></article> -->
+		<div class="page_emotion box_swipe" id="page_emotion" style="background:#fff; border-top:1px #eee solid;overflow: hidden;position: relative;">
+	<!-- 		<img src="images/arclist/0.gif">
+			<img src="images/arclist/1.gif">
+			<img src="images/arclist/2.gif">
+			<img src="images/arclist/3.gif"> -->
+			<div id="list_emotion" class="list_emotion pt_10">
+				
+			</div><!-- 表情框 -->
+			<dt><ol id="nav_emotion" class="nav_emotion"></ol>
+				</dt><!-- 分页提示点 -->
+				<span class="close-emotion" style="    position: absolute;top: 133px;left: 15.5%;">关闭表情</span>
+		</div>
+	</div>
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script src="js/webiaoqin.js" ></script>
+<script type="text/javascript">
+	function to_write(){
+	    $('.wenwen_btn img').attr('src','images/yy_btn.png');
+	    $('.wenwen_btn').attr('onclick','to_say()');
+	    $('.write_box,.wenwen_help button').show();
+	    $(".emotion-btn").show();
+	    $('.circle-button,.wenwen_help a').hide();
+	    $('.write_box input').focus();
+	    for_bottom();
+	}
+
+	function to_say(){
+		$('.write_list').remove();
+	    $('.wenwen_btn img').attr('src','images/jp_btn.png');
+	    $('.wenwen_btn').attr('onclick','to_write()');
+	    $('.write_box,.wenwen_help button').hide();
+	    $('.circle-button,.wenwen_help a').show();
+	}
+
+	function up_say(){
+		$(".meng_ceng").show();
+
+		$('.write_list').remove();
+	    var text = $('.write_box').html(),
+	        str  = '<div class="question">';
+	        str += '<div class="heard_img right"><img src="images/tx2.png"/></div>';
+	        str += '<div class="question_text clear"><p>'+text+'</p><i></i>';
+	        str += '</div></div>';
+
+	    if(text == ''){
+	        alert('请输入提问！');
+	        $('.write_box input').focus();
+	    }else{
+	        $('.speak_box').append(str);
+	        $('.write_box input').val('');
+	        $('.write_box input').focus();
+	        autoWidth();
+	        for_bottom();
+	        $.ajax({
+
+				type:"get",//ajax请求方式（只有两种：get/post）
+				//dataType: 'json',
+				async: false,
+				dataType: "jsonp",
+				data:{infos: text},//传给服务器的数据(json格式).
+
+				url:"http://localhost:8011/api/chatbot",//ajax请求地址(将data的数据发送给(php1.php),后台获得数据进行处理，处理完再返还给前台)	
+				jsonp: "callback",
+				jsonpCallback:"success_jsonpCallback",
+				success: function(dat){//对响应回来(后台返还回来)的数据进行处理
+					//console.log(dat)
+					//alert(dat)
+					 var ans  = '<div class="answer"><div class="heard_img left"><img src="images/tx.png"/></div>';
+	            	ans += '<div class="answer_text"><p>机器人的回复：'+dat+'</p><i></i>';
+	        		ans += '</div></div>';
+		        	$('.speak_box').append(ans);
+					for_bottom();
+					$(".meng_ceng").hide();
+
+				}
+			});
+	        /*setTimeout(function(){
+	            var ans  = '<div class="answer"><div class="heard_img left"><img src="images/tx.png"/></div>';
+	            	ans += '<div class="answer_text"><p>您发送的文字是：'+text+'</p><i></i>';
+	        		ans += '</div></div>';
+	        	$('.speak_box').append(ans);
+				for_bottom();
+	        },1000);*/
+	    }
+	    $(".write_box").html("");
+	}
+
+	function keyup(){
+		var footer_height = $('.wenwen-footer').outerHeight(),
+			text = $('.write_box input').val(),
+			str = '<div class="write_list">'+text+'</div>';
+		if (text == '' || text == undefined){
+			$('.write_list').remove();
+		}else{
+			$('.wenwen-footer').append(str);
+			$('.write_list').css('bottom',footer_height);
+		}
+	}
+
+	var wen  = document.getElementById('wenwen');
+	function _touch_start(event){
+        event.preventDefault();
+        $('.wenwen_text').css('background','#c1c1c1');
+        $('.wenwen_text span').css('color','#fff');
+        $('.saying').show();
+    }
+
+    function _touch_end(event){
+        event.preventDefault();
+        $('.wenwen_text').css('background','#fff');
+        $('.wenwen_text .circle-button').css('color','#666');    
+        $('.saying').hide();
+        var str  = '<div class="question">';
+	        str += '<div class="heard_img right"><img src="images/tx.png"/></div>';
+	        str += '<div class="question_text clear"><p>不好意思，我听不清！</p><i></i>';
+	        str += '</div></div>';
+		$('.speak_box').append(str);
+		for_bottom();
+        setTimeout(function(){
+        	var ans  = '<div class="answer"><div class="heard_img left"><img src="images/tx.png"/></div>';
+	        	ans += '<div class="answer_text"><p>我不知道你在说什么?</p><i></i>';
+	    		ans += '</div></div>';
+	    	$('.speak_box').append(ans);
+			for_bottom();
+        },1000);       
+    }
+
+    wen.addEventListener("touchstart", _touch_start, false);
+    wen.addEventListener("touchend", _touch_end, false);
+    
+    function for_bottom(){
+		var speak_height = $('.speak_box').height();
+		$('.speak_box,.speak_window').animate({scrollTop:speak_height},500);
+	}
+	
+	function autoWidth(){
+		$('.question_text').css('max-width',$('.question').width()-60);
+	}
+	autoWidth();
+</script>
+<script>
+	$(function(){
+		var say = '说点什么...';
+		if ($("#form_article").html() === "") {
+			$("#form_article").html(say);
+		}
+		$("#form_article").click(function(){
+            if($("#form_article").html() == say){
+               	$("#form_article").html("");
+            }
+	    });
+	    $("#page_emotion  dd").click(function(){
+            $("#form_article").html( $("#form_article").html().replace(say, '') );
+	    });
+	});
+
+</script>
+<script type="text/javascript">
+	/*表情点击*/
+	$(function(){
+		$(".emotion-btn").click(function(){
+			$(".wenwen-footer").css("bottom","154px");
+			$(".emotion-div").css("bottom","0");
+			$(".speak_window").css("padding-bottom","200px");
+		});
+		/*关闭表情*/
+		$(".close-emotion").click(function(){
+			$(".wenwen-footer").css("bottom","0");
+			$(".emotion-div").css("bottom","-300px");
+			$(".speak_window").css("padding-bottom","0");
+		});
+	})
+</script>
+</body>
+</html>

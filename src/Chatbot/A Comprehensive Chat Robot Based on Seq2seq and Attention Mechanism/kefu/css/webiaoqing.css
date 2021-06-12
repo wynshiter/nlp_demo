@@ -1,0 +1,48 @@
+﻿body{
+	overflow-x: hidden;
+}
+.page_emotion p{
+	display: inline-block;
+	float:left;
+	width:14%;
+	height:24px;
+	margin:5px 0;
+	text-align:center;
+}
+.list_emotion *[data-key]{
+	color:transparent;
+	display: block;
+	width:24px;
+	height:24px;
+	margin: auto;
+	/*background:url(img/default.gif) no-repeat 0 0;*/
+	background:url(img/default.png) no-repeat 0 0;
+	-webkit-background-size:auto 24px;
+}
+.list_emotion *.del{
+	background-image:url(img/del.png);
+}
+.nav_emotion{
+	padding:10px 0;
+	text-align: center;
+}
+.nav_emotion span{
+	/*display: inline-block;
+	width:8px;
+	height:8px;
+	border-radius:10px;
+	background: #ebebeb;
+	margin:0 5px;*/
+	    display: block;
+    float: left;
+    width: 8px;
+    height: 8px;
+    border-radius: 10px;
+    background: #ebebeb;
+    margin: 0 5px;
+    position: relative;
+    left: 140px;
+}
+.nav_emotion span.on{
+	background-color:#bbb;
+}
